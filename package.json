@@ -1,0 +1,27 @@
+{
+  "name": "vocademy-nodejs-mysql",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamidazimi72/vocademy-nodejs-mysql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamidazimi72/vocademy-nodejs-mysql/issues"
+  },
+  "homepage": "https://github.com/hamidazimi72/vocademy-nodejs-mysql#readme",
+  "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.47",
+    "@sequelize/mysql": "^7.0.0-alpha.47",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
