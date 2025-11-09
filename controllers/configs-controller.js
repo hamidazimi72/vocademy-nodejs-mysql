@@ -1,6 +1,19 @@
 import { ConfigModel } from "../models/index.js";
 
 export class ConfigController {
+  static async getAllSymbols(req, res) {
+    try {
+      const items = await ConfigModel.findAll();
+      if (items) {
+        res.success("عملیات با موفقیت انجام شد", items);
+      } else {
+        res.fail("تنظیماتی یافت نشد", 400);
+      }
+    } catch (error) {
+      res.fail("خطایی رخ داده است", 400);
+    }
+  }
+
   static async getBySymbol(req, res) {
     const symbol = req?.params?.symbol || "";
 
@@ -28,9 +41,7 @@ export class ConfigController {
   }
 
   static async updateValue(req, res) {
-    const { value } = req?.body;
-
-    const symbol = req?.params?.symbol || "";
+    const { symbol, value } = req?.body;
 
     try {
       const item = await ConfigModel.findOne({ where: { symbol } });

@@ -12,11 +12,6 @@ const app = express();
 app.use(corsMiddleware);
 app.use(responseMiddleware);
 app.use(express.json());
-// app.use((req, res, next) => {
-//   console.clear();
-//   console.log(req);
-//   next();
-// });
 
 app.use("/api/v1/unknowns", UnknownsRoutes);
 app.use("/api/v1/configs", ConfigsRoutes);
