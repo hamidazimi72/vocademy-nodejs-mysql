@@ -21,6 +21,7 @@
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.47",
     "@sequelize/mysql": "^7.0.0-alpha.47",
+    "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0"
   }

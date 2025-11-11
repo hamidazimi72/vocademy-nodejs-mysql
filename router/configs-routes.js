@@ -4,9 +4,9 @@ import { ConfigController } from "../controllers/index.js";
 
 const router = express.Router();
 
-router.get("/", ConfigController.getAllSymbols);
-router.get("/:symbol", ConfigController.getBySymbol);
+router.get("/", ConfigController.getAllConfigs);
+router.get("/:symbol", ConfigController.getConfigBySymbol);
 router.post("/", ConfigController.createConfig);
-router.put("/", ConfigController.updateValue);
+router.put("/:symbol", ConfigController.updateConfig);
 
 export default router;

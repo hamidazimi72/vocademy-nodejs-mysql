@@ -1,7 +1,7 @@
 import { ConfigModel } from "../models/index.js";
 
 export class ConfigController {
-  static async getAllSymbols(req, res) {
+  static async getAllConfigs(req, res) {
     try {
       const items = await ConfigModel.findAll();
       if (items) {
@@ -14,7 +14,7 @@ export class ConfigController {
     }
   }
 
-  static async getBySymbol(req, res) {
+  static async getConfigBySymbol(req, res) {
     const symbol = req?.params?.symbol || "";
 
     try {
@@ -40,8 +40,10 @@ export class ConfigController {
     }
   }
 
-  static async updateValue(req, res) {
-    const { symbol, value } = req?.body;
+  static async updateConfig(req, res) {
+    const { value } = req?.body;
+
+    const symbol = req?.params?.symbol || "";
 
     try {
       const item = await ConfigModel.findOne({ where: { symbol } });
