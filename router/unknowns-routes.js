@@ -10,5 +10,7 @@ router.post("/check-answer", UnknownsController.answerChecking);
 router.get("/untranslate", UnknownsController.getAllUntranslatedWord);
 router.get("/search-translate", UnknownsController.searchTranslate);
 router.get("/question", UnknownsController.createQuestion);
+//
+router.post("/bulk-create", UnknownsController.bulkCreateWord);
 
 export default router;

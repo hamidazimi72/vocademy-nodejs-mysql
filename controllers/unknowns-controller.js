@@ -3,6 +3,8 @@ import axios from "axios";
 import sequelize from "../db.js";
 import { ConfigModel, KnownModel, UnknownModel } from "../models/index.js";
 import { Op } from "@sequelize/core";
+import { unknownsData } from "../data.js";
+import { ArrayAPI } from "../utils/array.js";
 
 export class UnknownsController {
   static async createWord(req, res) {
@@ -10,9 +12,22 @@ export class UnknownsController {
     const translate = req?.body?.translate || null;
 
     try {
-      const item = await UnknownModel.create({ word, translate, correctCount: 0 });
+      const item = await UnknownModel.create({ word, translate });
       res.success("کلمه جدید با موفقیت ثبت شد", item, 201);
     } catch (error) {
+      res.fail("خطایی رخ داده است", 400);
+    }
+  }
+
+  static async bulkCreateWord(req, res) {
+    try {
+      const items = await UnknownModel.bulkCreate(
+        unknownsData.map((item) => ({ word: item?.word, translate: item?.translate || null }))
+      );
+      // UnknownModel.destroy({ where: { word: { [Op.isNot]: null } } });
+      res.success("کلمه جدید با موفقیت ثبت شد", items, 201);
+    } catch (error) {
+      console.log(error);
       res.fail("خطایی رخ داده است", 400);
     }
   }
@@ -116,8 +131,16 @@ export class UnknownsController {
         attributes: ["value"],
       });
 
-      const items = await UnknownModel.findAll({ where: { translate: { [Op.not]: null } }, limit: +currentCountWord });
-      res.success("ok", items);
+      const items = await UnknownModel.findAll({
+        where: { translate: { [Op.not]: null } },
+        limit: +currentCountWord,
+        attributes: ["id", "word", "translate"],
+      });
+      const selectedOptions = ArrayAPI.getRandomItems(items, 4);
+      const options = selectedOptions.map((item) => item?.translate);
+      const question = selectedOptions[Math.floor(Math.random() * 4)];
+      const formattedQuestion = { id: question?.id, word: question?.word };
+      res.success("ok", { options, question: formattedQuestion });
     } catch (error) {
       //
     }
